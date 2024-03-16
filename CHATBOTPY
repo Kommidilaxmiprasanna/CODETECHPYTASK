@@ -1,0 +1,43 @@
+import random
+
+# Define responses for different types of user inputs
+responses = {
+    "greetings": ["Hello!", "Hi there!", "Hey!"],
+    "farewell": ["Goodbye!", "See you later!", "Bye!"],
+    "thanks": ["You're welcome!", "No problem!", "Anytime!"],
+    "default": ["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure I follow."],
+}
+
+# Function to generate a response based on user input
+def generate_response(user_input):
+    user_input = user_input.lower()  # Convert user input to lowercase for case-insensitive matching
+
+    # Check for specific keywords in user input to determine the appropriate response
+    if any(word in user_input for word in ["hello", "hi", "hey", "howdy"]):
+        return random.choice(responses["greetings"])
+    elif any(word in user_input for word in ["bye", "goodbye"]):
+        return random.choice(responses["farewell"])
+    elif any(word in user_input for word in ["thanks", "thank you"]):
+        return random.choice(responses["thanks"])
+    else:
+        return random.choice(responses["default"])
+
+# Main function to run the chatbot
+def chatbot():
+    print("Welcome! How can I assist you today?")
+
+    while True:
+        user_input = input("You: ")
+
+        # Check if user wants to exit the conversation
+        if user_input.lower() in ["exit", "quit", "goodbye"]:
+            print("Chatbot: " + random.choice(responses["farewell"]))
+            break
+
+        # Generate a response based on user input
+        response = generate_response(user_input)
+        print("Chatbot:", response)
+
+# Run the chatbot
+if __name__ == "__main__":
+    chatbot()
